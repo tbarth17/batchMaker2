@@ -1,0 +1,97 @@
+ // Bourbon & Neat
+@import '../../bower_components/bourbon/dist/bourbon';
+@import '../../bower_components/neat/app/assets/stylesheets/neat';
+
+// Custom Styles
+$header-background: #bfbfbf;
+$sidebar-background: #e6e6e6;
+
+html {
+  height: 100%
+}
+
+body {
+  $grid-columns: 15;
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  height: 100%;
+}
+
+header {
+  @include span-columns(15);
+  background-color: $header-background;
+  height: 60px;
+  padding: 10px;
+
+  .tag-line {
+    position: absolute;
+    float: left;
+    margin-top: 10px;
+  }
+
+  .batch-maker {
+    text-align: center;
+    font-size: 24px;
+    display: block;
+    margin-top: 5px;
+  }
+
+  .widget-container {
+    float: right;
+    margin-top: -20px;
+  }
+}
+
+.sidebar {
+  background: $sidebar-background;
+  @include span-columns(2);
+  height: 100%;
+  float: left;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 15px;;
+
+  li {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.content-container {
+  @include outer-container;
+  @include span-columns(12);
+  background: green;
+  height: 100%;
+}
+
+.my-recipes {
+  @include outer-container;
+  @include span-columns(15);
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+
+  li {
+    @include span-columns(3);
+    background: blue;
+    height: 150px;
+  }
+}
+
+.public-recipes {
+  @include outer-container;
+  @include span-columns(15);
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+
+  li {
+    @include span-columns(3);
+    background: blue;
+    height: 150px;
+  }
+}
