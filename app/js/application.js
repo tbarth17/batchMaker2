@@ -1,1 +1,1 @@
-window.BatchMaker = Ember.Application.Create();
+window.BatchMaker = Ember.Application.create();

@@ -1,3 +1,3 @@
-BatchMaker.Router.Map(function() {
+BatchMaker.Router.map(function() {
 
-})
+});

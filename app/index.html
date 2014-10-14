@@ -23,6 +23,7 @@
     <!-- endbuild -->
   </head>
   <body>
+    <script type='text/x-handlebars' data-template-name='application'>
 
       <header>
         <span class='tag-line'>The kitchen is yours chef!</span>
@@ -47,93 +48,103 @@
       </div> <!-- sidebar -->
 
     <div class='content-container'>
-      <div class='category-title-container'>
-        <div class='category-title'>My Recipes</div>
-        <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-        </div>
-      </div>
-
-          <ul class='my-recipes'>
-            <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-            <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-            <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-            <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-            <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-          </ul>
-
-      <div class='category-title-container'>
-        <div class='category-title'>Public Recipes</div>
-        <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-        </div>
-      </div>
-
-
-          <ul class='public-recipes'>
-            <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-            <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-            <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-            <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-            <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-          </ul>
-
-      <div class='category-title-container'>
-        <div class='category-title'>Popular Recipes</div>
-        <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-        </div>
-      </div>
-
-          <ul class='popular-recipes'>
-            <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-            <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-            <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-            <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-            <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-          </ul>
-
-      <div class='category-title-container'>
-        <div class='category-title'>My Recipes</div>
-        <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-        </div>
-      </div>
-
-          <ul class='my-favorite-recipes'>
-            <li style='background-image: url(http://baconmockup.com/200/200)'></li>
-            <li style='background-image: url(http://baconmockup.com/200/200)'></li>
-            <li style='background-image: url(http://baconmockup.com/200/200)'></li>
-            <li style='background-image: url(http://baconmockup.com/200/200)'></li>
-            <li style='background-image: url(http://baconmockup.com/200/200)'></li>
-          </ul>
-
-      <div class='category-title-container'>
-        <div class='category-title'>My Pantry</div>
-        <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-        </div>
-      </div>
-
-
-          <ul class='my-pantry'>
-            <li style='background-image: url(http://fillmurray.com/150/150)'></li>
-            <li style='background-image: url(http://fillmurray.com/150/150)'></li>
-            <li style='background-image: url(http://fillmurray.com/150/150)'></li>
-            <li style='background-image: url(http://fillmurray.com/150/150)'></li>
-            <li style='background-image: url(http://fillmurray.com/150/150)'></li>
-          </ul>
-
+      {{outlet}}
     </div> <!-- content-container -->
-
     </div>
+  </script>
 
+ <script type='text/x-handlebars' data-template-name='index'>
+
+   <div class='category-title-container'>
+     <div class='category-title'>My Recipes</div>
+     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     </div>
+   </div>
+
+       <ul class='my-recipes'>
+         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
+         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
+         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
+         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
+         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
+       </ul>
+
+   <div class='category-title-container'>
+     <div class='category-title'>Public Recipes</div>
+     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     </div>
+   </div>
+
+
+       <ul class='public-recipes'>
+         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
+         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
+         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
+         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
+         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
+       </ul>
+
+   <div class='category-title-container'>
+     <div class='category-title'>Popular Recipes</div>
+     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     </div>
+   </div>
+
+       <ul class='popular-recipes'>
+         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
+         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
+         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
+         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
+         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
+       </ul>
+
+   <div class='category-title-container'>
+     <div class='category-title'>My Recipes</div>
+     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     </div>
+   </div>
+
+       <ul class='my-favorite-recipes'>
+         <li style='background-image: url(http://baconmockup.com/200/200)'></li>
+         <li style='background-image: url(http://baconmockup.com/200/200)'></li>
+         <li style='background-image: url(http://baconmockup.com/200/200)'></li>
+         <li style='background-image: url(http://baconmockup.com/200/200)'></li>
+         <li style='background-image: url(http://baconmockup.com/200/200)'></li>
+       </ul>
+
+   <div class='category-title-container'>
+     <div class='category-title'>My Pantry</div>
+     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     </div>
+   </div>
+
+
+       <ul class='my-pantry'>
+         <li style='background-image: url(http://fillmurray.com/150/150)'></li>
+         <li style='background-image: url(http://fillmurray.com/150/150)'></li>
+         <li style='background-image: url(http://fillmurray.com/150/150)'></li>
+         <li style='background-image: url(http://fillmurray.com/150/150)'></li>
+         <li style='background-image: url(http://fillmurray.com/150/150)'></li>
+       </ul>
+
+ </script>
 
 
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../bower_components/handlebars/handlebars.js"></script>
+    <script src="../bower_components/ember/ember.js"></script>
+    <!-- <script src="../bower_components/ember-data/ember-data.js"></script> -->
+
+
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js scripts/main.js -->
+        <script src="js/application.js"></script>
+        <script src="js/router.js"></script>
 
 
         <!-- endbuild -->
