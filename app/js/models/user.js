@@ -1,5 +1,5 @@
 BatchMaker.User = DS.Model.extend({
-  name: DS.attr('string'),
+  username: DS.attr('string'),
   recipes: DS.hasMany('recipe'),
-  pantry: DS.hasMany('pantry-food')
+  pantry: DS.hasMany('pantry_food')
 });
