@@ -19,7 +19,7 @@ BatchMaker.UserRoute = Ember.Route.extend({
     return this.store.find('user');
   }
 });
-//
-// BatchMaker.RecipesRoute = Ember.Route.extend({
-//
-// });
+
+BatchMaker.CreateRoute = Ember.Route.extend({
+
+});

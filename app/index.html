@@ -26,7 +26,7 @@
     <script type='text/x-handlebars' data-template-name='application'>
 
       <header>
-        <span class='tag-line'>The kitchen is yours chef!</span>
+        <span class='tag-line'>The kitchen is yours {{username}}!</span>
         <span class='batch-maker'>BATCH MAKER</span>
         <div class='widget-container'>
           <span class="octicon octicon-plus"></span>
@@ -129,9 +129,15 @@
 
  </script>
 
- <script type='text/x-handlebars' data-template-name='create'>
-   <span>stuff</span>
-
+ <script type='text/x-handlebars' data-template-name='recipes/create'>
+  <span>Basic Info</span>
+  <form>
+    {{input type="file" name='img' accept='image/*'}}
+    {{input type="text" placeholder='Recipe Name'}}
+    {{input type="text" placeholder='Author'}}
+    {{input type="checkbox" value='public'}} Make Public
+    {{view Ember.Select content=recipeType value=selectedRecipeType placeholder='Recipe Type'}}
+  </form>
 
  </script>
 
@@ -143,6 +149,10 @@
     <script src="../bower_components/handlebars/handlebars.js"></script>
     <script src="../bower_components/ember/ember.js"></script>
     <script src="../bower_components/ember-data/ember-data.js"></script>
+    <script src="../bower_components/firebase/firebase.js"></script>
+    <script src="../bower_components/emberfire/dist/emberfire.js"></script>
+
+
 
 
     <!-- endbower -->
