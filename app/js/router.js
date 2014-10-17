@@ -35,6 +35,6 @@ BatchMaker.ApplicationRoute = Ember.Route.extend({
 
 BatchMaker.RecipesShowRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('recipe', '-JZQZYZu_WuWmub7SO6R');
+    return this.store.find('recipe', '-JZR8L8UgLkRfYvxx35-');
   }
 });

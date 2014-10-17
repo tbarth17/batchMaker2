@@ -28,6 +28,13 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
   actions: {
     createRecipe: function() {
       var user = this.get('controllers.application.currentUser');
+      var food = this.store.createRecord('food', {
+        name: this.get('ingredientName')
+      });
+      var ingredientFood = this.store.createRecord('ingredientFood', {
+        quantity: this.get('ingredientAmount'),
+        measurementUnit: this.get('selectedMeasurementUnit')
+      });
       var recipe = this.store.createRecord('recipe', {
         title: this.get('title'),
         author: user,
@@ -40,13 +47,10 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
         recipeYield: this.get('recipeYield'),
         yieldValue: this.get('yieldValue')
       });
-      var food = this.store.createRecord('food', {
-        name: this.get('ingredientName')
-      });
-      var ingredientFood = this.store.createRecord('ingredientFood', {
-        quantity: this.get('ingredientAmount'),
-        measurementUnit: this.get('selectedMeasurementUnit')
-      });
+      food.save();
+      ingredientFood.get('foods').addObject(food);
+      ingredientFood.save();
+      recipe.get('ingredients').addObject(ingredientFood);
       recipe.save();
       user.get('recipes').addObject(recipe);
       user.save();
@@ -58,6 +62,9 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       this.set('temperature', '');
       this.set('recipeYield', '');
       this.set('yieldValue', '');
+      this.set('ingredientName', '');
+      this.set('selectedMeasurementUnit', '');
+      this.set('ingredientAmount', '');
     }
   }
 });

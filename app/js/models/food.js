@@ -1,3 +1,4 @@
-BatchMaler.Food = Ember.Model.extend({
-  name: DS.attr('string')
+BatchMaker.Food = DS.Model.extend({
+  name: DS.attr('string'),
+  ingredientFood: DS.belongsTo('ingredientFood')
 });

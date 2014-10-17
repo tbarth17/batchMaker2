@@ -8,6 +8,6 @@ BatchMaker.Recipe = DS.Model.extend({
   cookTemp: DS.attr('number'),
   tempUnit: DS.attr('string'),
   recipeYield: DS.attr('number'),
-  yieldValue: DS.attr('string')
-  // ingredients: DS.hasMany('ingredientFood')
+  yieldValue: DS.attr('string'),
+  ingredients: DS.hasMany('ingredientFood')
 });
