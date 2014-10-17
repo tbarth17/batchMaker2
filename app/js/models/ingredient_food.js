@@ -1,4 +1,5 @@
-BatchMaker.Ingredient_Food = DS.Model.extend({
+BatchMaker.IngredientFood = DS.Model.extend({
   quantity: DS.attr('number'),
+  measurementUnit: DS.attr('string'),
   food: DS.belongsTo('food')
 });

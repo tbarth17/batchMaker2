@@ -26,7 +26,7 @@
     <script type='text/x-handlebars' data-template-name='application'>
 
       <header>
-        <span class='tag-line'>The kitchen is yours {{username}}!</span>
+        <span class='tag-line'>The kitchen is yours {{currentUser.username}}!</span>
         <span class='batch-maker'>BATCH MAKER</span>
         <div class='widget-container'>
           <span class="octicon octicon-plus"></span>
@@ -129,18 +129,68 @@
 
  </script>
 
+ <script type='text/x-handlebars' data-template-name='login'>
+   <span>Login</span>
+     <form>
+      {{input type='text' value=username placeholder='User Name'}}
+      <button {{action 'logIn'}}>Log in</button>
+    </form>
+ </script>
+
  <script type='text/x-handlebars' data-template-name='recipes/create'>
   <span>Basic Info</span>
   <form>
-    {{input type="file" name='img' accept='image/*'}}
-    {{input type="text" placeholder='Recipe Name'}}
-    {{input type="text" placeholder='Author'}}
-    {{input type="checkbox" value='public'}} Make Public
-    {{view Ember.Select content=recipeType value=selectedRecipeType placeholder='Recipe Type'}}
+    {{input type="text" value=title placeholder='Recipe Name'}}
+    {{view Ember.Select
+      content=recipeType
+      optionValuePath='content.value'
+      optionLabelPath='content.label'
+      prompt='Recipe Type'
+      value=selectedType
+      }}
+    {{input type='checkbox' name='isPrivate' checked=isPrivate}} Make Private
+    {{input type='text' value=prepTime placeholder='Prep Time(min)'}}
+    {{input type='text' value=cookTime placeholder='Cook Time(min)'}}
+    {{input type='text' value=temperature placeholder='Cook Temp'}}
+    {{view Ember.Select
+      content=tempUnit
+      optionValuePath='content.value'
+      optionLabelPath='content.label'
+      value=selectedTempUnit
+      }}
+    This recipe will make: {{input type='text' value=recipeYield placeholder='Amount'}}
+    {{input type='text' value=yieldValue placeholder='cookies, loaves etc.'}}
+  <br>
+  <h3>Step 1</h3>
+    {{input type='text' value=ingredientAmount placeholder='Amount'}}
+    {{view Ember.Select
+      content=measureUnit
+      optionValuePath='content.value'
+      optionLabelPath='content.label'
+      value=selectedMeasurementUnit
+      prompt='Unit'
+      }}
+    {{input type='text' value=ingredientName placeholder='Ingredient'}}
+
+    <button {{action 'createRecipe'}}>Save this Recipe</button>
   </form>
 
  </script>
 
+ <script type='text/x-handlebars' data-template-name='recipes/show'>
+  <h1>{{currentRecipe.title}}</h1>
+  <img src="//fillmurray.com/600/400">
+    <div>
+      <div>By {{currentRecipe.author.username}}</div>
+      <div>Recipe Type: <h3>{{currentRecipe.recipeType}}</h3></div>
+      <div>Prep Time: <h3>{{currentRecipe.prepTime}} min</h3></div>
+      <div>Cook Time: <h3>{{currentRecipe.cookTime}} min</h3></div>
+      <div>Cook Temp: <h3>{{currentRecipe.cookTemp}}{{currentRecipe.tempUnit}} </h3></div>
+    </div>
+  <div class='recipe-show-req-ingredients'>
+    <div><h4>{{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
+  </div>
+ </script>
 
 
     <!-- build:js scripts/vendor.js -->
@@ -148,13 +198,9 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/handlebars/handlebars.js"></script>
     <script src="../bower_components/ember/ember.js"></script>
-    <script src="../bower_components/ember-data/ember-data.js"></script>
+    <script src="../bower_components/ember-data/index.js"></script>
     <script src="../bower_components/firebase/firebase.js"></script>
     <script src="../bower_components/emberfire/dist/emberfire.js"></script>
-
-
-
-
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -164,8 +210,14 @@
         <script src="js/models/user.js"></script>
         <script src="js/models/recipe.js"></script>
         <script src="js/models/recipe.js"></script>
+        <script src="js/models/food.js"></script>
         <script src="js/models/pantry_food.js"></script>
         <script src="js/models/ingredient_food.js"></script>
+        <script src="js/controllers/login_controller.js"></script>
+        <script src="js/controllers/application_controller.js"></script>
+        <script src="js/controllers/user_controller.js"></script>
+        <script src="js/controllers/recipes_create_controller.js"></script>
+        <script src="js/controllers/recipes_show_controller.js"></script>
 
         <!-- endbuild -->
 </body>

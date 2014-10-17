@@ -1,9 +1,9 @@
 BatchMaker.Router.map(function() {
-  this.route('user', {path: ':user_name'});
+  this.route('user', {path: '/user'});
 
   this.resource('recipes', function() {
     this.route('create');
-    this.route('show', {path: ':recipe_id'});
+    this.route('show', {path: '/show'});
     this.route('edit', {path: ':recipe_id/edit'});
   });
 
@@ -14,12 +14,27 @@ BatchMaker.Router.map(function() {
   this.route('pantry');
 });
 
-BatchMaker.UserRoute = Ember.Route.extend({
+BatchMaker.ApplicationRoute = Ember.Route.extend({
+  // beforeModel: function() {
+  //   var user = this.controllerFor('application').get('currentUser');
+  //     if (! user) {
+  //     this.transitionTo('login');
+  //   }
+  // },
   model: function(){
-    return this.store.find('user');
+    return this.store.find('user', 'user_id_1');
   }
+
 });
 
-BatchMaker.CreateRoute = Ember.Route.extend({
+// BatchMaker.UserRoute = Ember.Route.extend({
+//   model: function() {
+//     return this.store.find('recipe');
+//   }
+// });
 
+BatchMaker.RecipesShowRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.find('recipe', '-JZQZYZu_WuWmub7SO6R');
+  }
 });
