@@ -1,5 +1,6 @@
 BatchMaker.Router.map(function() {
   this.route('user', {path: '/user'});
+  this.route('myRecipes');
 
   this.resource('recipes', function() {
     this.route('create');

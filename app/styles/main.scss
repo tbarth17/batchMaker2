@@ -13,7 +13,7 @@ $sidebar-background: #e6e6e6;
   padding: 0;
 
   li {
-    @include span-columns(3);
+    @include span-columns(2.9);
     height: 150px;
     background-size: cover;
     background-position: center center;
@@ -99,7 +99,12 @@ header {
   @include span-columns(12);
   /* background: green; */
   min-height: 100%;
+  padding: 0;
   padding-top: 20px;
+}
+
+.add-new-recipe-tag {
+  margin-top: 120px;
 }
 
 .my-recipes {
@@ -111,10 +116,11 @@ header {
 
   li {
     @include outer-container;
-    @include span-columns(3);
+    @include span-columns(2.9);
 
     div {
       @include span-columns(15);
+      text-align: center;
       height: 150px;
       background-size: cover;
       background-position: center center;
@@ -137,4 +143,9 @@ header {
 
 .my-pantry {
   @include recipe-layout;
+}
+
+.recipe-show-photo {
+  @include span-colums(10);
+  height: 300px;
 }

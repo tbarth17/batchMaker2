@@ -62,7 +62,7 @@
    </div>
 
        <ul class='my-recipes'>
-         <li>{{#link-to 'recipes.create'}}<div style='background-image: url(http://fillmurray.com/300/300)'></div>{{/link-to}}</li>
+         <li>{{#link-to 'recipes.create'}}<div style='background-image: url(http://fillmurray.com/300/300)'><div class='add-new-recipe-tag'>Add New Recipe</div></div>{{/link-to}}</li>
         {{#each recipeList itemController='recipePreview'}}
          <li>{{#link-to 'recipes.show' this}}<div {{bind-attr style=imgStyle}}></div>{{/link-to}}</li>
         {{/each}}
@@ -191,7 +191,7 @@
 
  <script type='text/x-handlebars' data-template-name='recipes/show'>
   <h1>{{currentRecipe.title}}</h1>
-  <img src="//fillmurray.com/600/400">
+  <img {{bind-attr src=imgUrl}}>
     <div>
       <div>By {{currentRecipe.author.username}}</div>
       <div>Recipe Type: <h3>{{currentRecipe.recipeType}}</h3></div>
@@ -204,10 +204,15 @@
   </div>
     {{#each step in model.steps}}
       {{step.directions}}
-        {{#each ingredient in steps.ingredients}}
+        {{#each ingredient in step.ingredients}}
           {{ingredient.ingredientAmount}}
+          {{ingredient.measurementUnit}}
+          {{ingredient.food.name}}
         {{/each}}
     {{/each}}
+ </script>
+
+ <script type='text/x-handlebars' data-template-name='myRecipes'>
  </script>
 
 
