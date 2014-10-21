@@ -9,5 +9,5 @@ BatchMaker.Recipe = DS.Model.extend({
   tempUnit: DS.attr('string'),
   recipeYield: DS.attr('number'),
   yieldValue: DS.attr('string'),
-  ingredients: DS.hasMany('ingredientFood')
+  steps: DS.hasMany('step', {embedded: true}),
 });

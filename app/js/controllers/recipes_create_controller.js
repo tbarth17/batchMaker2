@@ -1,18 +1,6 @@
 BatchMaker.RecipesCreateController = Ember.Controller.extend({
   needs: ['application'],
 
-  recipeType: [
-    {label: 'Breakfast', value: 'Breakfast'},
-    {label: 'Lunch', value: 'Lunch'},
-    {label: 'Dinner', value: 'Dinner'},
-    {label: 'Dessert', value: 'Dessert'}
-  ],
-
-  tempUnit: [
-    {label: 'ºF', value: 'ºF'},
-    {label: 'ºC', value: 'ºC'}
-  ],
-
   measureUnit: [
     {label: 'Cups', value: 'cups'},
     {label: 'Tbsp.', value: 'tbsp'},
@@ -25,16 +13,47 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
     {label: 'Grams', value: 'g'}
   ],
 
+
+  recipeType: [
+    {label: 'Breakfast', value: 'Breakfast'},
+    {label: 'Lunch', value: 'Lunch'},
+    {label: 'Dinner', value: 'Dinner'},
+    {label: 'Dessert', value: 'Dessert'}
+  ],
+
+  tempUnit: [
+    {label: 'ºF', value: 'ºF'},
+    {label: 'ºC', value: 'ºC'}
+  ],
+
   actions: {
+    addStep: function() {
+      var ingredient = this.store.createRecord('ingredientFood', {});
+      var step = this.store.createRecord('step', {});
+      step.get('ingredients').addObject(ingredient);
+      this.get('steps').addObject(step);
+    },
+
     createRecipe: function() {
+      console.log(this.get('steps'));
       var user = this.get('controllers.application.currentUser');
-      var food = this.store.createRecord('food', {
-        name: this.get('ingredientName')
+      var self = this;
+      this.get('steps').forEach(function(step){
+        step.get('ingredients').forEach(function(ingredient){
+          if(ingredient.get('foodName') && ! ingredient.get('selectedFood')) {
+            var name = ingredient.get('foodName');
+            var food = self.store.createRecord('food', {name: name});
+            ingredient.set('food', food);
+            food.save();
+          } else {
+            ingredient.set('food', ingredient.get('selectedFood'));
+          }
+        });
       });
-      var ingredientFood = this.store.createRecord('ingredientFood', {
-        quantity: this.get('ingredientAmount'),
-        measurementUnit: this.get('selectedMeasurementUnit')
-      });
+      // var ingredientFood = this.store.createRecord('ingredientFood', {
+      //   quantity: this.get('ingredientAmount'),
+      //   measurementUnit: this.get('selectedMeasurementUnit')
+      // });
       var recipe = this.store.createRecord('recipe', {
         title: this.get('title'),
         author: user,
@@ -47,10 +66,8 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
         recipeYield: this.get('recipeYield'),
         yieldValue: this.get('yieldValue')
       });
-      food.save();
-      ingredientFood.get('foods').addObject(food);
-      ingredientFood.save();
-      recipe.get('ingredients').addObject(ingredientFood);
+      // food.save();
+      recipe.get('steps').addObjects(this.get('steps'));
       recipe.save();
       user.get('recipes').addObject(recipe);
       user.save();
@@ -65,6 +82,7 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       this.set('ingredientName', '');
       this.set('selectedMeasurementUnit', '');
       this.set('ingredientAmount', '');
+
     }
   }
 });

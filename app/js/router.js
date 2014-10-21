@@ -27,6 +27,21 @@ BatchMaker.ApplicationRoute = Ember.Route.extend({
 
 });
 
+BatchMaker.RecipesCreateRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    var ingredient = this.store.createRecord('ingredientFood', {});
+    var step = this.store.createRecord('step', {});
+    step.get('ingredients').addObject(ingredient);
+    controller.set('steps', [step]);
+    controller.set('food', model);
+  },
+
+  model: function() {
+    return this.store.find('food');
+  }
+});
+
 // BatchMaker.UserRoute = Ember.Route.extend({
 //   model: function() {
 //     return this.store.find('recipe');
@@ -35,6 +50,6 @@ BatchMaker.ApplicationRoute = Ember.Route.extend({
 
 BatchMaker.RecipesShowRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('recipe', '-JZR8L8UgLkRfYvxx35-');
+    return this.store.find('recipe', '-JZUTGYqc5zdDPxmbUi7');
   }
 });

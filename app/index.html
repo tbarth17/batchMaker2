@@ -161,17 +161,25 @@
     This recipe will make: {{input type='text' value=recipeYield placeholder='Amount'}}
     {{input type='text' value=yieldValue placeholder='cookies, loaves etc.'}}
   <br>
-  <h3>Step 1</h3>
-    {{input type='text' value=ingredientAmount placeholder='Amount'}}
-    {{view Ember.Select
-      content=measureUnit
-      optionValuePath='content.value'
-      optionLabelPath='content.label'
-      value=selectedMeasurementUnit
-      prompt='Unit'
-      }}
-    {{input type='text' value=ingredientName placeholder='Ingredient'}}
-
+  <h3>Steps</h3>
+    {{#each step in steps itemController='step'}}
+      {{#each ingredient in step.ingredients}}
+        <li>
+          {{input type='text' value=ingredient.ingredientAmount placeholder='Amount'}}
+          {{view Ember.Select
+            content=measureUnit
+            optionValuePath='content.value'
+            optionLabelPath='content.label'
+            value=ingredient.measurementUnit
+            prompt='Unit'
+            }}
+          {{type-ahead data=food name='name' selection=ingredient.selectedFood value=ingredient.foodName placeholder='Ingredient'}}
+          <button {{action 'addIngredient'}}>+</button>
+        </li>
+      {{/each}}
+        {{textarea value=step.directions cols="80" rows="6" placeholder='What directions go with this step?'}}
+        <button class='new-step-button' {{action 'addStep'}}>Add New Step</button>
+    {{/each}}
     <button {{action 'createRecipe'}}>Save this Recipe</button>
   </form>
 
@@ -190,6 +198,12 @@
   <div class='recipe-show-req-ingredients'>
     <div><h4>{{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
   </div>
+    {{#each step in model.steps}}
+      {{step.directions}}
+        {{#each ingredient in steps.ingredients}}
+          {{ingredient.ingredientAmount}}
+        {{/each}}
+    {{/each}}
  </script>
 
 
@@ -201,6 +215,8 @@
     <script src="../bower_components/ember-data/index.js"></script>
     <script src="../bower_components/firebase/firebase.js"></script>
     <script src="../bower_components/emberfire/dist/emberfire.js"></script>
+    <script src="../bower_components/typeahead.js/dist/typeahead.js"></script>
+    <script src="../bower_components/ember-typeahead/dist/ember-typeahead.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -210,11 +226,13 @@
         <script src="js/models/user.js"></script>
         <script src="js/models/recipe.js"></script>
         <script src="js/models/food.js"></script>
+        <script src="js/models/step.js"></script>
         <script src="js/models/pantry_food.js"></script>
         <script src="js/models/ingredient_food.js"></script>
         <script src="js/controllers/login_controller.js"></script>
         <script src="js/controllers/application_controller.js"></script>
         <script src="js/controllers/user_controller.js"></script>
+        <script src="js/controllers/step_controller.js"></script>
         <script src="js/controllers/recipes_create_controller.js"></script>
         <script src="js/controllers/recipes_show_controller.js"></script>
 

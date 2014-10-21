@@ -1,4 +1,4 @@
-BatchMaker.RecipesShowController = Ember.Controller.extend({
+BatchMaker.RecipesShowController = Ember.ObjectController.extend({
   needs: ['application'],
   currentRecipe: Ember.computed.alias('model')
 });

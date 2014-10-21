@@ -8,6 +8,11 @@
     "bourbon": "~4.0.2",
     "neat": "~1.6.0",
     "normalize-css": "~3.0.1",
-    "emberfire": "~1.2.7"
+    "emberfire": "~1.2.7",
+    "ember-typeahead": "~0.1.1"
+  },
+  "resolutions": {
+    "jquery": "~2.1.1",
+    "ember": ">=1.4.0 < 2.0.0"
   }
 }
