@@ -140,6 +140,11 @@
  <script type='text/x-handlebars' data-template-name='recipes/create'>
   <span>Basic Info</span>
   <form>
+    {{#if url}}
+    <img {{bind-attr src=url}}>
+    {{else}}
+    <button {{action 'addPhoto'}}>Add Photo</button>
+    {{/if}}
     {{input type="text" value=title placeholder='Recipe Name'}}
     {{view Ember.Select
       content=recipeType
@@ -217,6 +222,7 @@
     <script src="../bower_components/emberfire/dist/emberfire.js"></script>
     <script src="../bower_components/typeahead.js/dist/typeahead.js"></script>
     <script src="../bower_components/ember-typeahead/dist/ember-typeahead.js"></script>
+    <script src="../bower_components/filepicker/filepicker.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

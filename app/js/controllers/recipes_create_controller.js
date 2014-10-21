@@ -27,6 +27,15 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
   ],
 
   actions: {
+    addPhoto: function() {
+      var self = this;
+      filepicker.pickAndStore({mimetype:"image/*"},{},
+      function(InkBlobs){
+        var url = InkBlobs[0].url;
+        self.set('url', url)
+      });
+    },
+
     addStep: function() {
       var ingredient = this.store.createRecord('ingredientFood', {});
       var step = this.store.createRecord('step', {});
@@ -55,6 +64,7 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       //   measurementUnit: this.get('selectedMeasurementUnit')
       // });
       var recipe = this.store.createRecord('recipe', {
+        imgUrl: this.get('url'),
         title: this.get('title'),
         author: user,
         isPrivate: this.get('isPrivate'),
