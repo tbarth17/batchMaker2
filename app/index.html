@@ -39,7 +39,7 @@
     <div class='wrapper'>
       <div class='sidebar'>
         <ul class='sidebar-list'>
-          <li>My Recipes</li>
+          {{#link-to 'user'}}<li>My Recipes</li>{{/link-to}}
           <li>Public Recipes</li>
           <li>Popular Recipes</li>
           <li>My Favorite Recipes</li>
@@ -62,11 +62,10 @@
    </div>
 
        <ul class='my-recipes'>
-         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
-         <li style='background-image: url(http://fillmurray.com/300/300)'></li>
+         <li>{{#link-to 'recipes.create'}}<div style='background-image: url(http://fillmurray.com/300/300)'></div>{{/link-to}}</li>
+        {{#each recipeList itemController='recipePreview'}}
+         <li>{{#link-to 'recipes.show' this}}<div {{bind-attr style=imgStyle}}></div>{{/link-to}}</li>
+        {{/each}}
        </ul>
 
    <div class='category-title-container'>

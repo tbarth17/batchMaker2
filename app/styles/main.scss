@@ -103,8 +103,25 @@ header {
 }
 
 .my-recipes {
-  @include recipe-layout
+  @include outer-container;
+  @include span-columns(15);
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+
+  li {
+    @include outer-container;
+    @include span-columns(3);
+
+    div {
+      @include span-columns(15);
+      height: 150px;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
 }
+
 
 .public-recipes {
   @include recipe-layout;
