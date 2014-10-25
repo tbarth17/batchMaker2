@@ -29,7 +29,7 @@
         <span class='tag-line'>The kitchen is yours {{currentUser.username}}!</span>
         <span class='batch-maker'>BATCH MAKER</span>
         <div class='widget-container'>
-          <span class="octicon octicon-plus"></span>
+          {{#link-to 'recipes.create'}}<span class="octicon octicon-plus"></span>{{/link-to}}
           <span class="octicon octicon-gear"></span>
           <span class="octicon octicon-broadcast"></span>
         </div><!-- widget-container -->
@@ -62,7 +62,11 @@
    </div>
 
        <ul class='my-recipes'>
-         <li>{{#link-to 'recipes.create'}}<div style='background-image: url(http://fillmurray.com/300/300)'><div class='add-new-recipe-tag'>Add New Recipe</div></div>{{/link-to}}</li>
+         <li>{{#link-to 'recipes.create'}}
+           <div class='add-new-recipe'>
+             <span class="mega-octicon octicon-plus"></span><br>
+             <div class='new-recipe-tag'>Create New Recipe</div>
+           </div>{{/link-to}}</li>
         {{#each recipeList itemController='recipePreview'}}
          <li>{{#link-to 'recipes.show' this}}<div {{bind-attr style=imgStyle}}></div>{{/link-to}}</li>
         {{/each}}
@@ -129,9 +133,12 @@
  </script>
 
  <script type='text/x-handlebars' data-template-name='login'>
-   <span>Login</span>
+   <h2>Login</h2>
      <form>
-      {{input type='text' value=username placeholder='User Name'}}
+      {{#link-to 'signup'}}Create a New Account{{/link-to}}
+        {{input type='email' value=email placeholder='Email'}}
+        {{input type='password' value=password placeholder='Password'}}
+
       <button {{action 'logIn'}}>Log in</button>
     </form>
  </script>
@@ -200,19 +207,29 @@
       <div>Cook Temp: <h3>{{currentRecipe.cookTemp}}{{currentRecipe.tempUnit}} </h3></div>
     </div>
   <div class='recipe-show-req-ingredients'>
-    <div><h4>{{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
+    <div><h4>Yields: {{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
   </div>
     {{#each step in model.steps}}
-      {{step.directions}}
+      <p>{{step.directions}}</p>
         {{#each ingredient in step.ingredients}}
-          {{ingredient.ingredientAmount}}
-          {{ingredient.measurementUnit}}
-          {{ingredient.food.name}}
+          <li>
+            {{ingredient.ingredientAmount}}
+            {{ingredient.measurementUnit}}
+            {{ingredient.food.name}}
+          </li>
         {{/each}}
     {{/each}}
  </script>
 
- <script type='text/x-handlebars' data-template-name='myRecipes'>
+ <script type='text/x-handlebars' data-template-name='signup'>
+   <h2>New User</h2>
+     <form>
+       {{input type='text' value=username placeholder='Create a username'}}
+       {{input type='email' value=email placeholder='Email'}}
+       {{input type='password' value=password placeholder='Password'}}
+       <button {{action 'createUser'}}>Create User</button>
+     </form>
+
  </script>
 
 
@@ -243,6 +260,8 @@
         <script src="js/controllers/application_controller.js"></script>
         <script src="js/controllers/user_controller.js"></script>
         <script src="js/controllers/step_controller.js"></script>
+        <script src="js/controllers/session_controller.js"></script>
+        <script src="js/controllers/signup_controller.js"></script>
         <script src="js/controllers/recipes_create_controller.js"></script>
         <script src="js/controllers/recipes_show_controller.js"></script>
 

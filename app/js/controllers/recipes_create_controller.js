@@ -1,5 +1,5 @@
 BatchMaker.RecipesCreateController = Ember.Controller.extend({
-  needs: ['application'],
+  needs: ['session', 'application'],
 
   measureUnit: [
     {label: 'Cups', value: 'cups'},
@@ -32,7 +32,7 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       filepicker.pickAndStore({mimetype:"image/*"},{},
       function(InkBlobs){
         var url = InkBlobs[0].url;
-        self.set('url', url)
+        self.set('url', url);
       });
     },
 
@@ -44,8 +44,7 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
     },
 
     createRecipe: function() {
-      console.log(this.get('steps'));
-      var user = this.get('controllers.application.currentUser');
+      var user = this.get('controllers.session.currentUser');
       var self = this;
       this.get('steps').forEach(function(step){
         step.get('ingredients').forEach(function(ingredient){
@@ -59,10 +58,6 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
           }
         });
       });
-      // var ingredientFood = this.store.createRecord('ingredientFood', {
-      //   quantity: this.get('ingredientAmount'),
-      //   measurementUnit: this.get('selectedMeasurementUnit')
-      // });
       var recipe = this.store.createRecord('recipe', {
         imgUrl: this.get('url'),
         title: this.get('title'),
@@ -78,6 +73,11 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       });
       // food.save();
       recipe.get('steps').addObjects(this.get('steps'));
+
+      var serializer = this.store.serializerFor('recipe');
+      var data = serializer.serialize(recipe);
+      console.log(data);
+
       recipe.save();
       user.get('recipes').addObject(recipe);
       user.save();

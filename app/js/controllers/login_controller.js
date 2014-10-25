@@ -1,12 +1,12 @@
 BatchMaker.LoginController = Ember.Controller.extend({
-  needs: ['application'],
+  needs: ['session'],
   username: '',
 
   actions: {
     logIn: function() {
-      var user = this.get('controllers.application.currentUser');
+      var credentials = this.getProperties('email', 'password');
+      this.get('controllers.session').authenticate(credentials);
       this.transitionToRoute('user');
-      console.log(user.get('username'));
     }
   }
 });
