@@ -91,6 +91,7 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       this.set('ingredientName', '');
       this.set('selectedMeasurementUnit', '');
       this.set('ingredientAmount', '');
+      this.set('imgUrl', '');
       this.transitionToRoute('user');
     }
   }

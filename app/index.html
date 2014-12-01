@@ -84,7 +84,7 @@
 
 
        <ul class='public-recipes'>
-         {{#unless isPrivate}}
+         {{#unless private}}
              {{#each publicRecipeList itemController='publicRecipePreview'}}
              {{log this}}
                <li>
@@ -108,20 +108,6 @@
          <li style='background-image: url(http://fillmurray.com/200/200)'></li>
          <li style='background-image: url(http://fillmurray.com/200/200)'></li>
          <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-       </ul>
-
-   <div class='category-title-container'>
-     <div class='category-title'>My Recipes</div>
-     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-     </div>
-   </div>
-
-       <ul class='my-favorite-recipes'>
-         <li style='background-image: url(http://placesheen.com/200/200)'></li>
-         <li style='background-image: url(http://placesheen.com/200/200)'></li>
-         <li style='background-image: url(http://placesheen.com/200/200)'></li>
-         <li style='background-image: url(http://placesheen.com/200/200)'></li>
-         <li style='background-image: url(http://placesheen.com/200/200)'></li>
        </ul>
 
    <div class='category-title-container'>
