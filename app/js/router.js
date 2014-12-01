@@ -14,6 +14,12 @@ BatchMaker.Router.map(function() {
   this.route('pantry');
 });
 
+BatchMaker.ApplicationRoute = Ember.Route.extend({
+  model: function() {
+    return this.controllerFor('session').get('currentUser');
+  }
+});
+
 BatchMaker.IndexRoute = Ember.Route.extend({
   beforeModel: function() {
     var user = this.controllerFor('session').get('currentUser');
