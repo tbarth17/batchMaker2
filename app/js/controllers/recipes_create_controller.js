@@ -26,6 +26,10 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
     {label: 'ºC', value: 'ºC'}
   ],
 
+  imgStyle: function(){
+    return new Ember.Handlebars.SafeString("background-image: url('"+this.get('url')+"')").toString();
+  }.property('url'),
+
   actions: {
     addPhoto: function() {
       var self = this;

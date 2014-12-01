@@ -115,7 +115,8 @@
 
    <div class='category-title-container'>
      <div class='category-title'>My Pantry</div>
-     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     <div class='view-all'>
+       View all <span class="octicon octicon-chevron-right"></span>
      </div>
    </div>
 
@@ -144,58 +145,58 @@
  <script type='text/x-handlebars' data-template-name='recipes/create'>
   <p>Basic Info</p>
     <div class='input-container'>
-    <form>
-      {{#if url}}
-      <img {{bind-attr src=url}}>
-      {{else}}
-      <button {{action 'addPhoto'}} class='add-photo'>
-      <span class="mega-octicon octicon-plus" class='add-icon'></span>
-      <span class='add-text'>Add Photo</span>
-      </button>
-    {{/if}}
-    {{input type="text" value=title placeholder='Recipe Name'}}
-    {{view Ember.Select
-      content=recipeType
-      optionValuePath='content.value'
-      optionLabelPath='content.label'
-      prompt='Recipe Type'
-      value=selectedType
-      }}
-      {{input type='checkbox' name='isPrivate' checked=isPrivate}}
-        <span>Make It Private</span>
-      {{input type='text' value=prepTime placeholder='Prep Time(min)'}}
-      {{input type='text' value=cookTime placeholder='Cook Time(min)'}}
-      {{input type='text' value=temperature placeholder='Cook Temp'}}
+      <form>
+        {{#if url}}
+        <div {{bind-attr style=imgStyle}} class='create-img'></div>
+        {{else}}
+        <button {{action 'addPhoto'}} class='add-photo'>
+        <span class="mega-octicon octicon-plus" class='add-icon'></span>
+        <span class='add-text'>Add Photo</span>
+        </button>
+      {{/if}}
+      {{input type="text" class='' value=title placeholder='Recipe Name'}}
       {{view Ember.Select
-        content=tempUnit
+        content=recipeType
         optionValuePath='content.value'
         optionLabelPath='content.label'
-        value=selectedTempUnit
+        prompt='Recipe Type'
+        value=selectedType
         }}
-        This recipe will make: {{input type='text' value=recipeYield placeholder='Amount'}}
-        {{input type='text' value=yieldValue placeholder='cookies, loaves etc.'}}
-        <br />
-        <h3>Steps</h3>
-        {{#each step in steps itemController='step'}}
-        {{#each ingredient in step.ingredients}}
-        <li>
-        {{input type='text' value=ingredient.ingredientAmount placeholder='Amount'}}
+        {{input type='checkbox' name='isPrivate' checked=isPrivate}}
+          <span>Make It Private</span>
+        {{input type='text' value=prepTime placeholder='Prep Time(min)'}}
+        {{input type='text' value=cookTime placeholder='Cook Time(min)'}}
+        {{input type='text' value=temperature placeholder='Cook Temp'}}
         {{view Ember.Select
-          content=measureUnit
+          content=tempUnit
           optionValuePath='content.value'
           optionLabelPath='content.label'
-          value=ingredient.measurementUnit
-          prompt='Unit'
+          value=selectedTempUnit
           }}
-          {{type-ahead data=food name='name' selection=ingredient.selectedFood value=ingredient.foodName placeholder='Ingredient'}}
-          <button {{action 'addIngredient'}}>+</button>
-          </li>
-          {{/each}}
-          {{textarea value=step.directions cols="80" rows="6" placeholder='What directions go with this step?'}}
-          <button class='new-step-button' {{action 'addStep'}}>Add New Step</button>
-          {{/each}}
-          <button {{action 'createRecipe'}}>Save this Recipe</button>
-        </form>
+          This recipe will make: {{input type='text' value=recipeYield placeholder='Amount'}}
+          {{input type='text' value=yieldValue placeholder='cookies, loaves etc.'}}
+          <br />
+          <h3>Steps</h3>
+          {{#each step in steps itemController='step'}}
+          {{#each ingredient in step.ingredients}}
+          <li>
+          {{input type='text' value=ingredient.ingredientAmount placeholder='Amount'}}
+          {{view Ember.Select
+            content=measureUnit
+            optionValuePath='content.value'
+            optionLabelPath='content.label'
+            value=ingredient.measurementUnit
+            prompt='Unit'
+            }}
+            {{type-ahead data=food name='name' selection=ingredient.selectedFood value=ingredient.foodName placeholder='Ingredient'}}
+            <button {{action 'addIngredient'}}>+</button>
+            </li>
+            {{/each}}
+            {{textarea value=step.directions cols="80" rows="6" placeholder='What directions go with this step?'}}
+            <button class='new-step-button' {{action 'addStep'}}>Add New Step</button>
+            {{/each}}
+            <button {{action 'createRecipe'}}>Save this Recipe</button>
+          </form>
 
       </script>
 

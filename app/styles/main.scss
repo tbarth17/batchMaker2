@@ -131,7 +131,13 @@ header {
   }
 }
 
-
+.create-img {
+  height: 170px;
+  @include span-columns(4);
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+}
 
 .my-recipes {
   @include outer-container;
@@ -195,24 +201,6 @@ header {
   @include outer-container;
   @include span-columns(13);
   @include shift(1);
-
-  form {
-    input {
-      @include span-columns(11);
-      height: 35px;
-      border-radius: 5px;
-    }
-
-  checkbox {
-    float: left;
-    height: 30px;
-  }
-
-  span {
-    display: block;
-  }
-  }
-
 }
 
 .recipe-show-container {
