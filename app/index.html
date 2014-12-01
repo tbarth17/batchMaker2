@@ -86,7 +86,6 @@
        <ul class='public-recipes'>
          {{#unless private}}
              {{#each publicRecipeList itemController='publicRecipePreview'}}
-             {{log this}}
                <li>
                  {{#link-to 'recipes.show' this}}
                    <div {{bind-attr style=imgStyle}}></div>
@@ -140,11 +139,15 @@
 
  <script type='text/x-handlebars' data-template-name='recipes/create'>
   <span>Basic Info</span>
-  <form>
+    <div class='input-container'>
+    <form>
     {{#if url}}
     <img {{bind-attr src=url}}>
     {{else}}
-    <button {{action 'addPhoto'}}>Add Photo</button>
+    <button {{action 'addPhoto'}} class='add-photo'>
+    <span class="mega-octicon octicon-plus" class='add-icon'></span>
+    <span class='add-text'>Add Photo</span>
+    </button>
     {{/if}}
     {{input type="text" value=title placeholder='Recipe Name'}}
     {{view Ember.Select
@@ -154,76 +157,78 @@
       prompt='Recipe Type'
       value=selectedType
       }}
-    {{input type='checkbox' name='isPrivate' checked=isPrivate}} Make Private
-    {{input type='text' value=prepTime placeholder='Prep Time(min)'}}
-    {{input type='text' value=cookTime placeholder='Cook Time(min)'}}
-    {{input type='text' value=temperature placeholder='Cook Temp'}}
-    {{view Ember.Select
-      content=tempUnit
-      optionValuePath='content.value'
-      optionLabelPath='content.label'
-      value=selectedTempUnit
-      }}
-    This recipe will make: {{input type='text' value=recipeYield placeholder='Amount'}}
-    {{input type='text' value=yieldValue placeholder='cookies, loaves etc.'}}
-  <br>
-  <h3>Steps</h3>
-    {{#each step in steps itemController='step'}}
-      {{#each ingredient in step.ingredients}}
+      {{input type='checkbox' name='isPrivate' checked=isPrivate}} Make Private
+      {{input type='text' value=prepTime placeholder='Prep Time(min)'}}
+      {{input type='text' value=cookTime placeholder='Cook Time(min)'}}
+      {{input type='text' value=temperature placeholder='Cook Temp'}}
+      {{view Ember.Select
+        content=tempUnit
+        optionValuePath='content.value'
+        optionLabelPath='content.label'
+        value=selectedTempUnit
+        }}
+        This recipe will make: {{input type='text' value=recipeYield placeholder='Amount'}}
+        {{input type='text' value=yieldValue placeholder='cookies, loaves etc.'}}
+        <br />
+        <h3>Steps</h3>
+        {{#each step in steps itemController='step'}}
+        {{#each ingredient in step.ingredients}}
         <li>
-          {{input type='text' value=ingredient.ingredientAmount placeholder='Amount'}}
-          {{view Ember.Select
-            content=measureUnit
-            optionValuePath='content.value'
-            optionLabelPath='content.label'
-            value=ingredient.measurementUnit
-            prompt='Unit'
-            }}
+        {{input type='text' value=ingredient.ingredientAmount placeholder='Amount'}}
+        {{view Ember.Select
+          content=measureUnit
+          optionValuePath='content.value'
+          optionLabelPath='content.label'
+          value=ingredient.measurementUnit
+          prompt='Unit'
+          }}
           {{type-ahead data=food name='name' selection=ingredient.selectedFood value=ingredient.foodName placeholder='Ingredient'}}
           <button {{action 'addIngredient'}}>+</button>
-        </li>
-      {{/each}}
-        {{textarea value=step.directions cols="80" rows="6" placeholder='What directions go with this step?'}}
-        <button class='new-step-button' {{action 'addStep'}}>Add New Step</button>
-    {{/each}}
-    <button {{action 'createRecipe'}}>Save this Recipe</button>
-  </form>
-
- </script>
-
- <script type='text/x-handlebars' data-template-name='recipes/show'>
-  <h1>{{currentRecipe.title}}</h1>
-  <img {{bind-attr src=imgUrl}}>
-    <div>
-      <div>By {{currentRecipe.author.username}}</div>
-      <div>Recipe Type: <h3>{{currentRecipe.recipeType}}</h3></div>
-      <div>Prep Time: <h3>{{currentRecipe.prepTime}} min</h3></div>
-      <div>Cook Time: <h3>{{currentRecipe.cookTime}} min</h3></div>
-      <div>Cook Temp: <h3>{{currentRecipe.cookTemp}}{{currentRecipe.tempUnit}} </h3></div>
-    </div>
-  <div class='recipe-show-req-ingredients'>
-    <div><h4>Yields: {{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
-  </div>
-    {{#each step in model.steps}}
-      <p>{{step.directions}}</p>
-        {{#each ingredient in step.ingredients}}
-          <li>
-            {{ingredient.ingredientAmount}}
-            {{ingredient.measurementUnit}}
-            {{ingredient.food.name}}
           </li>
-        {{/each}}
-    {{/each}}
- </script>
+          {{/each}}
+          {{textarea value=step.directions cols="80" rows="6" placeholder='What directions go with this step?'}}
+          <button class='new-step-button' {{action 'addStep'}}>Add New Step</button>
+          {{/each}}
+          <button {{action 'createRecipe'}}>Save this Recipe</button>
+        </form>
 
- <script type='text/x-handlebars' data-template-name='signup'>
-   <h2>New User</h2>
-     <form>
-       {{input type='text' value=username placeholder='Create a username'}}
-       {{input type='email' value=email placeholder='Email'}}
-       {{input type='password' value=password placeholder='Password'}}
-       <button {{action 'createUser'}}>Create User</button>
-     </form>
+      </script>
+
+      <script type='text/x-handlebars' data-template-name='recipes/show'>
+        <h1>{{currentRecipe.title}}</h1>
+        <img {{bind-attr src=imgUrl}}>
+        <div>
+          <div>By {{currentRecipe.author.username}}</div>
+          <div>Recipe Type: <h3>{{currentRecipe.recipeType}}</h3></div>
+          <div>Prep Time: <h3>{{currentRecipe.prepTime}} min</h3></div>
+          <div>Cook Time: <h3>{{currentRecipe.cookTime}} min</h3></div>
+          <div>Cook Temp: <h3>{{currentRecipe.cookTemp}}{{currentRecipe.tempUnit}} </h3></div>
+        </div>
+        <div class='recipe-show-req-ingredients'>
+          <div><h4>Yields: {{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
+        </div>
+        {{#each step in model.steps}}
+        <p>{{step.directions}}</p>
+        {{#each ingredient in step.ingredients}}
+        <li>
+          {{ingredient.ingredientAmount}}
+          {{ingredient.measurementUnit}}
+          {{ingredient.food.name}}
+        </li>
+        {{/each}}
+        {{/each}}
+      </script>
+
+      <script type='text/x-handlebars' data-template-name='signup'>
+        <h2>New User</h2>
+        <form>
+          {{input type='text' value=username placeholder='Create a username'}}
+          {{input type='email' value=email placeholder='Email'}}
+          {{input type='password' value=password placeholder='Password'}}
+          <button {{action 'createUser'}}>Create User</button>
+        </form>
+    </div>
+
 
  </script>
 

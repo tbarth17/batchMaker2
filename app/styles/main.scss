@@ -176,3 +176,32 @@ header {
   @include span-columns(10);
   height: 300px;
 }
+
+.add-photo {
+  @include span-columns(4);
+  height: 170px;
+  border-radius: 5px;
+  padding: 60px;
+  background: #BFBFBF;
+
+  .add-icon {
+    display: block;
+    margin-top: 80px;
+  }
+
+}
+
+.input-container {
+  @include outer-container;
+  @include span-columns(10);
+  @include shift(1);
+
+  form {
+    input {
+      @include span-columns(8);
+      height: 35px;
+      border-radius: 5px;
+    }
+  }
+
+}
