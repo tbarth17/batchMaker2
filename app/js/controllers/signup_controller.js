@@ -15,7 +15,6 @@ BatchMaker.SignupController = Ember.Controller.extend(Ember.Validations.Mixin, {
               email: credentials.email,
               username: self.get('username')
             });
-            console.log(user);
             user.save().then(function(){
               self.transitionToRoute('user');
             })

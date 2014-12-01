@@ -18,6 +18,15 @@ $sidebar-background: #e6e6e6;
     background-size: cover;
     background-position: center center;
     border-radius: 5px;
+
+    div {
+      @include span-columns(15);
+      text-align: center;
+      height: 170px;
+      background-size: cover;
+      background-position: center center;
+      border-radius: 5px;
+    }
   }
 }
 

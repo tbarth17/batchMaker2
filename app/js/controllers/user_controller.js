@@ -1,6 +1,12 @@
 BatchMaker.UserController = Ember.ArrayController.extend({
   needs: ['application'],
   user: Ember.computed.alias('controllers.application.currentUser'),
+
+
+  publicRecipeList: function(){
+    return this.get('content').slice(-5);
+  }.property('content.[]'),
+
   recipeList: function(){
     return this.get('content').slice(-4);
   }.property('content.[]')

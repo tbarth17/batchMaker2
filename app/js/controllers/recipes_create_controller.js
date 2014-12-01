@@ -76,7 +76,6 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
 
       var serializer = this.store.serializerFor('recipe');
       var data = serializer.serialize(recipe);
-      console.log(data);
 
       recipe.save();
       user.get('recipes').addObject(recipe);
@@ -92,7 +91,7 @@ BatchMaker.RecipesCreateController = Ember.Controller.extend({
       this.set('ingredientName', '');
       this.set('selectedMeasurementUnit', '');
       this.set('ingredientAmount', '');
-
+      this.transitionToRoute('user');
     }
   }
 });

@@ -26,7 +26,7 @@
     <script type='text/x-handlebars' data-template-name='application'>
 
       <header>
-        <span class='tag-line'>The kitchen is yours {{currentUser.username}}!{{log currentUser}}</span>
+        <span class='tag-line'>The kitchen is yours {{currentUser.username}}!</span>
         <span class='batch-maker'>BATCH MAKER</span>
         <div class='widget-container'>
           {{#link-to 'recipes.create'}}<span class="octicon octicon-plus"></span>{{/link-to}}
@@ -68,7 +68,11 @@
              <div class='new-recipe-tag'>Create New Recipe</div>
            </div>{{/link-to}}</li>
         {{#each recipeList itemController='recipePreview'}}
-         <li>{{#link-to 'recipes.show' this}}<div {{bind-attr style=imgStyle}}></div>{{/link-to}}</li>
+         <li>
+           {{#link-to 'recipes.show' this}}
+             <div {{bind-attr style=imgStyle}}></div>
+           {{/link-to}}
+         </li>
         {{/each}}
        </ul>
 
@@ -80,11 +84,16 @@
 
 
        <ul class='public-recipes'>
-         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
-         <li style='background-image: url(http://baconmockup.com/300/300)'></li>
+         {{#unless isPrivate}}
+             {{#each publicRecipeList itemController='publicRecipePreview'}}
+             {{log this}}
+               <li>
+                 {{#link-to 'recipes.show' this}}
+                   <div {{bind-attr style=imgStyle}}></div>
+                 {{/link-to}}
+               </li>
+              {{/each}}
+         {{/unless}}
        </ul>
 
    <div class='category-title-container'>
@@ -265,6 +274,7 @@
         <script src="js/controllers/signup_controller.js"></script>
         <script src="js/controllers/recipes_create_controller.js"></script>
         <script src="js/controllers/recipes_show_controller.js"></script>
+        <script src="js/controllers/public_recipe_preview_controller.js"></script>
 
         <!-- endbuild -->
 </body>
