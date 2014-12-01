@@ -160,7 +160,7 @@ header {
   @include recipe-layout;
 }
 
-.popular-recipes {
+.private-recipes {
   @include recipe-layout;
 }
 
@@ -193,15 +193,37 @@ header {
 
 .input-container {
   @include outer-container;
-  @include span-columns(10);
+  @include span-columns(13);
   @include shift(1);
 
   form {
     input {
-      @include span-columns(8);
+      @include span-columns(11);
       height: 35px;
       border-radius: 5px;
     }
+
+  checkbox {
+    float: left;
+    height: 30px;
   }
 
+  span {
+    display: block;
+  }
+  }
+
+}
+
+.recipe-show-container {
+  @include outer-container;
+  @include span-columns(11);
+  @include shift(2);
+}
+
+.recipe-show-img {
+  @include span-columns(15);
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
 }

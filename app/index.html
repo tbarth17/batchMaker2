@@ -84,29 +84,33 @@
 
 
        <ul class='public-recipes'>
-         {{#unless private}}
-             {{#each publicRecipeList itemController='publicRecipePreview'}}
+           {{#each publicRecipeList itemController='publicRecipePreview'}}
+             {{#unless isPrivate}}
                <li>
                  {{#link-to 'recipes.show' this}}
                    <div {{bind-attr style=imgStyle}}></div>
                  {{/link-to}}
                </li>
-              {{/each}}
-         {{/unless}}
+               {{/unless}}
+            {{/each}}
        </ul>
 
    <div class='category-title-container'>
-     <div class='category-title'>Popular Recipes</div>
+     <div class='category-title'>Private Recipes</div>
      <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
      </div>
    </div>
 
-       <ul class='popular-recipes'>
-         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
-         <li style='background-image: url(http://fillmurray.com/200/200)'></li>
+       <ul class='private-recipes'>
+         {{#each publicRecipeList itemController='publicRecipePreview'}}
+           {{#if isPrivate}}
+             <li>
+               {{#link-to 'recipes.show' this}}
+                 <div {{bind-attr style=imgStyle}}></div>
+               {{/link-to}}
+             </li>
+           {{/if}}
+         {{/each}}
        </ul>
 
    <div class='category-title-container'>
@@ -138,16 +142,16 @@
  </script>
 
  <script type='text/x-handlebars' data-template-name='recipes/create'>
-  <span>Basic Info</span>
+  <p>Basic Info</p>
     <div class='input-container'>
     <form>
-    {{#if url}}
-    <img {{bind-attr src=url}}>
-    {{else}}
-    <button {{action 'addPhoto'}} class='add-photo'>
-    <span class="mega-octicon octicon-plus" class='add-icon'></span>
-    <span class='add-text'>Add Photo</span>
-    </button>
+      {{#if url}}
+      <img {{bind-attr src=url}}>
+      {{else}}
+      <button {{action 'addPhoto'}} class='add-photo'>
+      <span class="mega-octicon octicon-plus" class='add-icon'></span>
+      <span class='add-text'>Add Photo</span>
+      </button>
     {{/if}}
     {{input type="text" value=title placeholder='Recipe Name'}}
     {{view Ember.Select
@@ -157,7 +161,8 @@
       prompt='Recipe Type'
       value=selectedType
       }}
-      {{input type='checkbox' name='isPrivate' checked=isPrivate}} Make Private
+      {{input type='checkbox' name='isPrivate' checked=isPrivate}}
+        <span>Make It Private</span>
       {{input type='text' value=prepTime placeholder='Prep Time(min)'}}
       {{input type='text' value=cookTime placeholder='Cook Time(min)'}}
       {{input type='text' value=temperature placeholder='Cook Temp'}}
@@ -195,28 +200,31 @@
       </script>
 
       <script type='text/x-handlebars' data-template-name='recipes/show'>
+      <div class='recipe-show-container'>
         <h1>{{currentRecipe.title}}</h1>
-        <img {{bind-attr src=imgUrl}}>
-        <div>
-          <div>By {{currentRecipe.author.username}}</div>
-          <div>Recipe Type: <h3>{{currentRecipe.recipeType}}</h3></div>
-          <div>Prep Time: <h3>{{currentRecipe.prepTime}} min</h3></div>
-          <div>Cook Time: <h3>{{currentRecipe.cookTime}} min</h3></div>
-          <div>Cook Temp: <h3>{{currentRecipe.cookTemp}}{{currentRecipe.tempUnit}} </h3></div>
-        </div>
-        <div class='recipe-show-req-ingredients'>
-          <div><h4>Yields: {{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
-        </div>
-        {{#each step in model.steps}}
-        <p>{{step.directions}}</p>
-        {{#each ingredient in step.ingredients}}
-        <li>
-          {{ingredient.ingredientAmount}}
-          {{ingredient.measurementUnit}}
-          {{ingredient.food.name}}
-        </li>
-        {{/each}}
-        {{/each}}
+        <div {{bind-attr style=imgStyle}} class='recipe-show-img'></div>
+            <div>
+            <div>By {{currentRecipe.author.username}}</div>
+            <div>Recipe Type: <h3>{{currentRecipe.recipeType}}</h3></div>
+            <div>Prep Time: <h3>{{currentRecipe.prepTime}} min</h3></div>
+            <div>Cook Time: <h3>{{currentRecipe.cookTime}} min</h3></div>
+            <div>Cook Temp: <h3>{{currentRecipe.cookTemp}}{{currentRecipe.tempUnit}} </h3></div>
+            </div>
+            <div class='recipe-show-req-ingredients'>
+            <div><h4>Yields: {{currentRecipe.recipeYield}} {{currentRecipe.yieldValue}}</h4></div>
+            </div>
+            {{#each step in model.steps}}
+            <p>{{step.directions}}</p>
+            {{#each ingredient in step.ingredients}}
+            <li>
+            {{ingredient.ingredientAmount}}
+            {{ingredient.measurementUnit}}
+            {{ingredient.food.name}}
+            </li>
+            {{/each}}
+            {{/each}}
+          </div>
+
       </script>
 
       <script type='text/x-handlebars' data-template-name='signup'>
