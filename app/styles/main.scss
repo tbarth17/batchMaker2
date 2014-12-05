@@ -112,7 +112,6 @@ header {
 .content-container {
   @include outer-container;
   @include span-columns(12);
-  /* background: green; */
   min-height: 100%;
   padding: 0;
   padding-top: 20px;
@@ -178,14 +177,10 @@ header {
   @include recipe-layout;
 }
 
-.recipe-show-photo {
-  @include span-columns(10);
-  height: 300px;
-}
-
-.add-photo {
+.add-photo-button {
   @include span-columns(4);
   height: 170px;
+  border: none;
   border-radius: 5px;
   padding: 60px;
   background: #BFBFBF;

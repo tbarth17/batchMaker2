@@ -143,18 +143,22 @@
  </script>
 
  <script type='text/x-handlebars' data-template-name='recipes/create'>
-  <p>Basic Info</p>
     <div class='input-container'>
+      <p>Basic Info</p>
       <form>
         {{#if url}}
         <div {{bind-attr style=imgStyle}} class='create-img'></div>
         {{else}}
-        <button {{action 'addPhoto'}} class='add-photo'>
+        <button {{action 'addPhoto'}} class='add-photo-button'>
         <span class="mega-octicon octicon-plus" class='add-icon'></span>
         <span class='add-text'>Add Photo</span>
         </button>
       {{/if}}
-      {{input type="text" class='' value=title placeholder='Recipe Name'}}
+      {{input type="text" class='recipe-title' value=title placeholder='Recipe Name'}}
+      <span>
+        By {{username}}
+        {{log application.currentUser}}
+      </span>
       {{view Ember.Select
         content=recipeType
         optionValuePath='content.value'
@@ -197,6 +201,7 @@
             {{/each}}
             <button {{action 'createRecipe'}}>Save this Recipe</button>
           </form>
+        </div>
 
       </script>
 
