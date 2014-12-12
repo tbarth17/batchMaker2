@@ -177,6 +177,14 @@ header {
   @include recipe-layout;
 }
 
+.user-recipes-page {
+  @include recipe-layout;
+
+  li {
+    margin-bottom: 20px;
+  }
+}
+
 .add-photo-button {
   @include span-columns(4);
   height: 170px;

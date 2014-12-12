@@ -57,7 +57,9 @@
 
    <div class='category-title-container'>
      <div class='category-title'>My Recipes</div>
+     {{#link-to 'recipes.showUserRecipes'}}
      <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+     {{/link-to}}
      </div>
    </div>
 
@@ -203,6 +205,19 @@
           </form>
         </div>
 
+      </script>
+
+      <script type='text/x-handlebars' data-template-name='recipes/showUserRecipes'>
+        <h2>My Recipes</h2>
+          <ul class='user-recipes-page'>
+            {{#each itemController='recipePreview'}}
+              <li>
+                {{#link-to 'recipes.show' this}}
+                  <div {{bind-attr style=imgStyle}}></div>
+                {{/link-to}}
+              </li>
+            {{/each}}
+          </ul>
       </script>
 
       <script type='text/x-handlebars' data-template-name='recipes/show'>
