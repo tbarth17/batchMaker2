@@ -4,7 +4,13 @@ BatchMaker.UserController = Ember.ArrayController.extend({
 
 
   publicRecipeList: function(){
-    return this.get('content').slice(-5);
+  var recipes = this.get('content');
+  return recipes.filterBy('isPrivate', false).slice(-5);
+  }.property('content.[]'),
+
+  privateRecipeList: function(){
+    var recipes = this.get('content');
+    return recipes.filterBy('isPrivate', true).slice(-5);
   }.property('content.[]'),
 
   recipeList: function(){
