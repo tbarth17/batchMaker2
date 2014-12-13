@@ -39,6 +39,7 @@
     <div class='wrapper'>
       <div class='sidebar'>
         <ul class='sidebar-list'>
+          {{#link-to 'user'}}<li>Home</li>{{/link-to}}
           {{#link-to 'recipes.showUserRecipes'}}<li>My Recipes</li>{{/link-to}}
           <li>Public Recipes</li>
           <li>Popular Recipes</li>
@@ -62,7 +63,7 @@
      {{/link-to}}
      </div>
    </div>
-
+{{log this}}
        <ul class='my-recipes'>
          <li>{{#link-to 'recipes.create'}}
            <div class='add-new-recipe'>
@@ -78,8 +79,25 @@
         {{/each}}
        </ul>
 
+
+       <div class='category-title-container'>
+       <div class='category-title'>My Private Recipes</div>
+       <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
+       </div>
+       </div>
+
+       <ul class='private-recipes'>
+         {{#each privateRecipeList itemController='publicRecipePreview'}}
+           <li>
+             {{#link-to 'recipes.show' this}}
+               <div {{bind-attr style=imgStyle}}></div>
+             {{/link-to}}
+           </li>
+         {{/each}}
+       </ul>
+
    <div class='category-title-container'>
-     <div class='category-title'>Public Recipes</div>
+     <div class='category-title'>My Public Recipes</div>
      <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
      </div>
    </div>
@@ -93,22 +111,6 @@
                  {{/link-to}}
                </li>
             {{/each}}
-       </ul>
-
-   <div class='category-title-container'>
-     <div class='category-title'>Private Recipes</div>
-     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-     </div>
-   </div>
-
-       <ul class='private-recipes'>
-         {{#each privateRecipeList itemController='publicRecipePreview'}}
-             <li>
-               {{#link-to 'recipes.show' this}}
-                 <div {{bind-attr style=imgStyle}}></div>
-               {{/link-to}}
-             </li>
-         {{/each}}
        </ul>
 
    <div class='category-title-container'>

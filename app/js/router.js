@@ -27,6 +27,9 @@ BatchMaker.IndexRoute = Ember.Route.extend({
       if (! user) {
       this.transitionTo('login');
     }
+    else {
+      this.transitionTo('user');
+    }
   },
 
   model: function(){
