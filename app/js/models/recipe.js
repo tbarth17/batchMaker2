@@ -1,7 +1,7 @@
 BatchMaker.Recipe = DS.Model.extend({
   imgUrl: DS.attr('string'),
   title: DS.attr('string'),
-  author: DS.belongsTo('user'),
+  author: DS.belongsTo('user', {async: true}),
   isPrivate: DS.attr('boolean'),
   recipeType: DS.attr('string'),
   prepTime: DS.attr('number'),

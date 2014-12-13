@@ -4,10 +4,10 @@ BatchMaker.UserController = Ember.ArrayController.extend({
 
 
   publicRecipeList: function(){
-  var recipes = this.store.find('recipe');
-  console.log(recipes);
-  return recipes;
-}.property('recipe.[]'),
+  var allRecipes = this.store.find('recipe');
+  console.log(allRecipes);
+  return allRecipes;
+  }.property('recipe.[]'),
 
   privateRecipeList: function(){
     var recipes = this.get('content');

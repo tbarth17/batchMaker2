@@ -96,19 +96,24 @@
        </ul>
 
    <div class='category-title-container'>
-     <div class='category-title'>My Public Recipes</div>
-     <div class='view-all'>View all <span class="octicon octicon-chevron-right"></span>
-     </div>
+     <div class='category-title'>Public Recipes</div>
+       {{#link-to 'recipes.showPublicRecipes'}}
+         <div class='view-all'>
+           View all <span class="octicon octicon-chevron-right"></span>
+         </div>
+       {{/link-to}}
    </div>
 
        <ul class='public-recipes'>
-           {{#each publicRecipeList itemController='publicRecipePreview'}}
-               <li>
-                 {{#link-to 'recipes.show' this}}
-                   <div {{bind-attr style=imgStyle}}></div>
-                 {{/link-to}}
-               </li>
-            {{/each}}
+         {{#each publicRecipeList itemController='publicRecipePreview'}}
+           {{#unless isPrivate}}
+             <li>
+               {{#link-to 'recipes.show' this}}
+                 <div {{bind-attr style=imgStyle}}></div>
+               {{/link-to}}
+             </li>
+            {{/unless}}
+          {{/each}}
        </ul>
 
    <div class='category-title-container'>
@@ -214,6 +219,23 @@
               </li>
             {{/each}}
           </ul>
+      </script>
+
+      <script type='text/x-handlebars' data-template-name='recipes/showPublicRecipes'>
+        <h2>Public Recipes</h2>
+          <ul class='public-recipes-page'>
+            {{#each itemController='recipePreview'}}
+              {{#unless isPrivate}}
+                <li>
+                  {{#link-to 'recipes.show' this}}
+                    <div {{bind-attr style=imgStyle}}></div>
+                  {{/link-to}}
+                </li>
+              {{/unless}}
+            {{/each}}
+          </ul>
+
+
       </script>
 
       <script type='text/x-handlebars' data-template-name='recipes/show'>

@@ -4,6 +4,7 @@ BatchMaker.Router.map(function() {
   this.resource('recipes', function() {
     this.route('create');
     this.route('showUserRecipes');
+    this.route('showPublicRecipes');
     this.route('show', {path: ':recipe_id'});
     this.route('edit', {path: ':recipe_id/edit'});
   });
@@ -77,6 +78,19 @@ BatchMaker.RecipesShowUserRecipesRoute = Ember.Route.extend({
     return this.controllerFor('session').get('currentUser').get('recipes');
   }
 });
+
+BatchMaker.RecipesShowPublicRecipesRoute = Ember.Route.extend({
+  beforeModel: function() {
+    var user = this.controllerFor('session').get('currentUser');
+    if(! user) {
+      this.transitionTo('login');
+    }
+  },
+
+  model: function() {
+    return this.store.find('recipe');
+  }
+})
 
 BatchMaker.RecipesShowRoute = Ember.Route.extend({
   model: function(params) {
